@@ -1,0 +1,27 @@
+syntax = "proto3";
+package proto;
+option java_package = "com.test.rpc";
+option java_multiple_files = false;
+
+message SayHelloRequest{
+  bytes name=1;
+}
+
+message SayHelloResponse{
+  bytes result=1;
+}
+
+service SayHelloService{
+  rpc SayHello(SayHelloRequest) returns (SayHelloResponse);
+  rpc GetResult (stream Value) returns (stream Result) {}
+}
+//定义Value消息类型，用于客户端消息
+message Value {
+  int32 value = 1;
+}
+//定义Result消息类型，包含总和，数字数量和平均值，用于服务端消息返回
+message Result {
+  int32 sum = 1;
+  int32 cnt = 2;
+  double avg = 3;
+}

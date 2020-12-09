@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"strconv"
+	"strings"
+)
 
 type User struct {
 	Name string `json:"name"`
@@ -41,8 +44,23 @@ const (
 //var reg *regexp.Regexp = regexp.MustCompile(separate_send)
 //var reg1 *regexp.Regexp = regexp.MustCompile()
 func main() {
-	var balance = [5]float32{1000.0, 2.0, 3.4, 7.0, 50.0}
-	for index := range balance{
-		fmt.Println(balance[index])
-	}	
+	numIdStr:=""
+	tid, err := strconv.ParseInt(numIdStr, 10, 64)
+	if err != nil {
+		print(err.Error())
+	}
+	print(tid)
+}
+
+func removeEmptyString(textArray []string) []string {
+	j := 0
+	for _, val := range textArray {
+		val = strings.TrimPrefix(val,"\n")
+		if val != "" {
+			textArray[j]=val
+			j++
+		}
+	}
+	return textArray[:j]
+
 }
